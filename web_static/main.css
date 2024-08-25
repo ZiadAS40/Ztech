@@ -1,0 +1,137 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400&family=Montserrat:wght@600;700&family=Merriweather:wght@700&family=Roboto+Slab:wght@500&family=Poppins:wght@500&family=Playfair+Display:ital,wght@0,400;1,400&display=swap');
+
+
+:root {
+    --primary-color: #FFFFFF;
+    --secondary-color: #C0392B;
+
+    --first-color: #F2F2F2;
+    --second-color: #333333;
+    --third-color: #E74C3C;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    color: #333333;
+}
+
+.container {
+    width: 92%;
+    height: 100%;
+    margin: auto;
+}
+
+ /* making the meida query for the responsive design */
+
+@media  only screen and (min-width: 567px) {
+    .container {
+        width: 540px;
+    } 
+}
+
+@media  only screen and (min-width: 1200px) {
+    .container {
+        width: 1140px;
+    } 
+}
+
+/* styling the header of the page */
+
+header {
+    background-color:var(--first-color);
+    height: 10vh;
+    width: 100%;
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+.logo {
+    width: 100px;
+}
+.logo-img {
+    width: 100%;
+    height: auto;
+    max-width: 300px;
+    aspect-ratio: 2 / 1; 
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    width: 300px; 
+    border: 1px solid var(--secondary-color);
+    border-radius: 25px;
+    overflow: hidden;
+    background-color: #f4f4f4;
+}
+
+.search-input:focus {
+    border: 1px solid var(--secondary-color);
+}
+
+.search-btn {
+    background: none;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-btn img {
+    width: 20px;
+    height: auto;
+}
+
+.search-btn:hover {
+    background-color: var(--secondary-color);
+}
+
+.search-input {
+    border: none;
+    outline: none;
+    flex: 1;
+    padding: 10px;
+    font-size: 16px;
+    background-color: transparent;
+}
+
+.search-input::placeholder {
+    color: #888;
+}
+
+.login {
+    width: 150px;
+    height: 100%;
+}
+
+.login .login-btn {
+    margin: 10px auto;
+    width: 100px;
+    height: 70%;
+    border-radius: 30px;
+    cursor: pointer;
+    background-color: var(--secondary-color);
+    border: none;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: medium;
+    color: var(--second-color);
+}
+
+.login .login-btn:hover {
+    background-color: var(--third-color);
+    color: var(--first-color);
+}
