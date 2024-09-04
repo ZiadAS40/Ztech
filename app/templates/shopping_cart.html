@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/shopping-cart.css') }}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <body>
+        <header class="main-header">
+            <div class="container">
+            <div class="logo-container">
+                <img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="Photo">
+            </div>
+            <div class="nav-container">
+                <button>Build</button>
+                <button>Help</button>
+                <button>Login</button>
+            </div>
+            </div>
+        </header>
+        <div class="sub-header">
+        <div class="container">
+            <button onclick="location.href = '{{ url_for('homePage')}}'" class="home-page-btn">Home</button>
+            <button onclick="location.href='{{ url_for('lt_page') }}'">Laptop</button>
+            <button onclick="location.href='{{ url_for('apple') }}'">Apple</button>
+            <button onclick="location.href='{{ url_for('accessory')}}'">Accesories</button>
+            <button>Proffissions</button>
+        </div>
+        </div>
+        <div class="shopping-section">
+            <div class="container">
+                {% for k, v in elements.items() %}
+                <div class="element">
+                    <div class="content">
+                        {% if v[0].name %}
+                        <p><B>Model</B>: {{ v[0].name }}</p><br/>
+                        {% else %}
+                        <p><B>Model</B>: {{ v[0].model }}</p><br/>
+                        {% endif %}
+                        <p><B>Price</B>: {{ v[0].price }} $</p><br/>
+                        <p><B>Total Price</B>: {{ v[0].price * v|length }} $</p><br/>
+                    </div>
+                    <div class="logo-and-buttons">
+                    <div class="logo">
+                        {% if v[0]['cat'] == "acc" %}
+                        <i class="fa-solid fa-computer"></i>
+                        {% elif v[0]['cat'] == "lt" %}
+                        <i class="fa-solid fa-laptop"></i>
+                        {% else %}
+                        <i class="fa-solid fa-desktop"></i>
+                        {% endif %}
+                    </div>
+                    <div class="buttons-container">
+                        <div class="buttons">
+                        <p class="total-elements">{{ v|length }}</p>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="constant-bar">
+            <div class="container">
+               <div class="const-container">
+                  <p><B>Total:</B>{{ total_price }} $</p>
+                  <button class="buy-btn">Buy</button>
+               </div> 
+            </div>
+        </div>
+        <script src="{{ url_for('static', filename='js/shopping-cart.js')}}"></script>
+</body>
+</html>

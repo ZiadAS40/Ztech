@@ -2,6 +2,7 @@
 """make the laptops section"""
 
 from api.v1.views import app_views
+import uuid
 from flask import jsonify, make_response
 
 
@@ -153,18 +154,25 @@ laptops = [
     }
 ]
 
+for laptop in laptops:
+    laptop['id'] = str(uuid.uuid4())
+    laptop['cat'] = "lt"
+    if laptop['ssd'] == 1:
+        laptop['ssd'] = 128
+    if laptop['ssd'] == 2:
+        laptop['ssd'] = 256
 
 @app_views.route('/products/laptops', methods=['GET'], strict_slashes=False)
 def laptops_getter():
     """getting all the laptops"""
-    f_id = 0
-    for laptop in laptops:
-        laptop['id'] = f_id
-        laptop['category'] = "windows"
-        if laptop['ssd'] == 1:
-            laptop['ssd'] = 128
-        if laptop['ssd'] == 2:
-            laptop['ssd'] = 256
-        f_id += 1
-    
     return make_response(jsonify(laptops), 200)
+
+@app_views.route('/products/laptops/<lt_id>', methods=['GET'], strict_slashes=False)
+def laptops_getter_with_id(lt_id):
+    """getting all the laptops"""
+    comp = {}
+    for laptop in laptops:
+        comp[lt_id] = laptop['id']
+        if lt_id == laptop['id']:
+            return make_response(jsonify(laptop), 200)
+    return make_response(jsonify(comp), 404)

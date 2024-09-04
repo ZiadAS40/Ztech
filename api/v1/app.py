@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """ Flask Application """
 
-from api.v1.views import app_views
 from flask import Flask, make_response, jsonify
 from flask_cors import CORS
 

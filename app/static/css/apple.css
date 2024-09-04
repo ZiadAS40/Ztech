@@ -21,48 +21,38 @@ body {
     color: #333333;
 }
 
-/* setting of the container */
-div.container {
-    margin: 0 160px;
-    display: grid;
-    column-gap: 20px;
-    grid-template-columns: repeat(12, 1fr);
+/* main apple container */
+
+.apple-container {
+    height: 500px;
 }
 
-/* start the adds section */
-.adds {
-    height: 350px;
-    margin-top: 15px;
-}
 
-.adds .container {
-    background-color: var(--first-color);
-    height: 100%;
-}
-/* end the adds section */
 
-/* starts the products section */
-.products-to-show {
-    height: 200px;
-    width: 100%;
-    padding: 1.5rem 0;
-}
-
-.products-to-show .container {
-    height: 100%;
-}
-
-.products-to-show .container div {
-    height: 150px;
-    grid-column: span 2;
+.apple-container .container a {
+    grid-column: 2 / 12;
     background-color: var(--first-color);
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 230px;
+    margin-top: 15px;
+    border-radius: 10px ;
+    cursor: pointer;
+    text-decoration: none;
+    color: var(--second-color);
 }
-
-.products-to-show .container div i {
-    font-size: 80px;
+.apple-container .container a:hover i,
+.apple-container .container a:hover h3 {
     color: var(--secondary-color);
 }
-/* end the products section */
+.apple-container .container a i {
+    font-size: 4rem;
+    margin-bottom: 30px;
+}
+
+.apple-container .container a h3 {
+    font-size: 2rem;
+    font-weight: bold;
+}

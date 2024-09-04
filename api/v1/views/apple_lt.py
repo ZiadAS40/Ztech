@@ -3,6 +3,7 @@
 
 from api.v1.views import app_views
 from flask import jsonify, make_response
+import uuid
 
 apple_laptops = [
     {
@@ -278,14 +279,22 @@ apple_laptops = [
 ]
 
 
+for lt in apple_laptops:
+    lt['id'] = str(uuid.uuid4())
+    lt['cat'] = "lt"
 
 
 @app_views.route('/products/apple/laptop', methods=['GET'], strict_slashes=False)
 def get_apple_lt():
     """get all the accessories"""
-    f_id = 0
-    for lt in apple_laptops:
-        lt['apple-dt-id'] = f_id
-        f_id += 1
+
 
     return make_response(jsonify(apple_laptops), 200)
+
+@app_views.route('/products/apple/laptop/<lt_id>', methods=['GET'], strict_slashes=False)
+def apple_laptops_getter_with_id(lt_id):
+    """getting all the apple_laptopss"""
+    for lt in apple_laptops:
+        if lt_id == lt['id']:
+            return make_response(jsonify(lt), 200)
+    return make_response(jsonify({}), 404)

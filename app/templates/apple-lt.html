@@ -6,6 +6,7 @@
     <title>Ztech</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/p-main.css') }}"/>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/laptop.css') }}"/>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/shopping-cart.css') }}"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
@@ -31,32 +32,27 @@
         <button>Proffissions</button>
     </div>
     </div>
-    <div class="adds">
-    <div class="container">
-        
-    </div>
-    </div>
-    <div class="products-to-show">
-    <div class="container">
-        <div class="product-one">
-            <i class="fa-brands fa-apple apple"></i>
+    <div class="lt-body">
+        <div class="container">
+            {% for laptop in laptops %}
+            <div class="lt" data-id="{{ laptop.id }}" data-type="apple/laptop">
+                <div class="i-container">
+                <i class="fa-solid fa-laptop"></i>
+                </div>
+                <div class="lt-content">
+                    <p><B>Model</B>: {{ laptop.name }}</p><br/>
+                    <p><B>Ram</B>: {{ laptop.ram }} G</p><br/>
+                    <p><B>srorage</B>: {{ laptop.ssd }} G</p><br/>
+                    <p><B>CPU</B>: {{ laptop.cpu }}</p><br/>
+                    <p><B>GPU</B>: {{ laptop.gpu }}</p><br/>
+                    <p><B>Price</B>: {{ laptop.price }} $</p><br/>
+                    <button class="add-btn" data-id="{{ laptop.id }}" data-type="laptops">Add to Basket</button>
+
+                </div>
+            </div>
+            {% endfor %}
         </div>
-        <div class="product-two">
-            <i class="fa-solid fa-computer"></i>
         </div>
-        <div class="product-three">
-            <i class="fa-solid fa-computer-mouse"></i>
-        </div>
-        <div class="product-four">
-            <i class="fa-solid fa-memory"></i>
-        </div>
-        <div class="product-five">
-            <i class="fa-solid fa-tv"></i>
-        </div>
-        <div class="product-six">
-            <i class="fa-solid fa-question"></i>
-        </div>
-     </div>
     </div>
     <a href="{{ url_for('shopping_cart')}}" class="basket-circul">
         <i class="fa-solid fa-cart-shopping"></i>

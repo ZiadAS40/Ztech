@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400&family=Montserrat:wght@600;700&family=Merriweather:wght@700&family=Roboto+Slab:wght@500&family=Poppins:wght@500&family=Playfair+Display:ital,wght@0,400;1,400&display=swap');
+
+/* main settings */
+:root {
+    --primary-color: #FFFFFF;
+    --secondary-color: #C0392B;
+
+    --first-color: #F2F2F2;
+    --second-color: #333333;
+    --third-color: #E74C3C;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    color: #333333;
+}
+
+/* setting of the container */
+div.container {
+    margin: 0 160px;
+    display: grid;
+    column-gap: 20px;
+    grid-template-columns: repeat(12, 1fr);
+}
+
+/* hreader styling */
+
+header {
+    height: 75px;
+    width: 100%;
+    background-color: var(--first-color);
+}
+.logo-container {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    height: 75px;
+    position: relative;
+}
+
+.logo-container img {
+    object-fit: cover;
+    width: 100%;
+    aspect-ratio: 2 / 1; 
+    height: 100%;
+}
+.nav-container {
+    grid-column: 9 / 13;
+    display: flex;
+    height: 75px;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.nav-container button {
+    width: 20%;
+    height: 30px;
+    background-color: var(--third-color);
+    border: none;
+    color: var(--second-color);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.nav-container button:hover {
+    background-color: var(--secondary-color);
+    color: var(--first-color);
+}
+
+/* end of main header settings */
+
+
+/* start sub heading styling */
+.sub-header {
+    width: 100%;
+    height: 2rem;
+    background-color: var(--first-color);
+    position: relative;
+    border-bottom: 1px solid var(--secondary-color);
+}
+
+.sub-header .container {
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.sub-header button {
+    width: 100px;
+    height: 1.5rem;
+    border: none;
+    border-radius: 10px;
+    background-color: var(--first-color);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    letter-spacing: 3px;
+}
+
+.sub-header .home-page-btn {
+    background-color: var(--third-color);
+    color: var(--first-color);
+}
+.sub-header button:hover {
+    background-color: var(--third-color);
+    color: var(--primary-color);
+}
+
+/* end of sub header styling */

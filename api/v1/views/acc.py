@@ -3,6 +3,7 @@
 
 from api.v1.views import app_views
 from flask import jsonify, make_response
+import uuid
 
 accessories = [
     {
@@ -34,11 +35,6 @@ accessories = [
         "kind": "External SSD",
         "model": "Samsung T7 1TB",
         "price": 169.99
-    },
-    {
-        "kind": "Docking Station",
-        "model": "CalDigit TS3 Plus",
-        "price": 249.99
     },
     {
         "kind": "Mouse Pad",
@@ -106,14 +102,24 @@ accessories = [
         "price": 299.99
     }
 ]
+for accessory in accessories:
+    accessory['id'] = str(uuid.uuid4())
+    accessory['cat'] = "acc"
 
 
 @app_views.route('/products/accessories', methods=['GET'], strict_slashes=False)
 def get_acc():
     """get all the accessories"""
-    f_id = 0
-    for accessory in accessories:
-        accessory['acc-id'] = f_id
-        f_id =+ 1
+
 
     return make_response(jsonify(accessories), 200)
+
+@app_views.route('/products/accessories/<acc_id>', methods=['GET'], strict_slashes=False)
+def accs_getter_with_id(acc_id):
+    """getting all the the accessories"""
+    comp = {}
+    for accessory in accessories:
+        comp[acc_id] = accessory['id']
+        if acc_id == accessory['id']:
+            return make_response(jsonify(accessory), 200)
+    return make_response(jsonify(comp), 404)
