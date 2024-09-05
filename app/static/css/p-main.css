@@ -52,16 +52,18 @@ div.container {
     height: 100%;
 }
 
-.products-to-show .container div {
+.products-to-show .container a {
     height: 150px;
     grid-column: span 2;
     background-color: var(--first-color);
     display: flex;
     align-items: center;
     justify-content: center;
+    text-decoration: none;
+    cursor: pointer;
 }
 
-.products-to-show .container div i {
+.products-to-show .container a i {
     font-size: 80px;
     color: var(--secondary-color);
 }

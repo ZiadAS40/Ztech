@@ -129,7 +129,7 @@ body {
 
 .constant-bar {
     height: 100px;
-    position: fixed;
+    position: sticky;
     bottom: 0;
     width: 100%;
 }

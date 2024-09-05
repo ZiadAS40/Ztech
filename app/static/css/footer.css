@@ -1,0 +1,55 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400&family=Montserrat:wght@600;700&family=Merriweather:wght@700&family=Roboto+Slab:wght@500&family=Poppins:wght@500&family=Playfair+Display:ital,wght@0,400;1,400&display=swap');
+
+/* main settings */
+:root {
+    --primary-color: #FFFFFF;
+    --secondary-color: #C0392B;
+
+    --first-color: #F2F2F2;
+    --second-color: #333333;
+    --third-color: #E74C3C;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    color: #333333;
+}
+
+/* main apple container */
+
+
+footer {
+    background-color: var(--second-color);
+    color: var(--first-color);
+    padding: 20px 0;
+    text-align: center;
+  }
+  .footer-container {
+    display: flex;
+    justify-content: space-around;
+  }
+  .footer-section h3 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+  }
+  .footer-section ul {
+    list-style: none;
+    padding: 0;
+  }
+  .footer-section ul li {
+    margin-bottom: 5px;
+  }
+  .footer-section a {
+    color: var(--first-color);
+    text-decoration: none;
+  }
+  .footer-section a:hover {
+    text-decoration: underline;
+  }

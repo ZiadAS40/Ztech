@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/p-main.css') }}"/>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}"/>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/shopping-cart.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
@@ -31,6 +32,7 @@
         <button>Proffissions</button>
     </div>
     </div>
+    <section>
     <div class="adds">
     <div class="container">
         
@@ -38,30 +40,51 @@
     </div>
     <div class="products-to-show">
     <div class="container">
-        <div class="product-one">
+        <a class="product-one" href="{{ url_for('apple')}}">
             <i class="fa-brands fa-apple apple"></i>
-        </div>
-        <div class="product-two">
+        </a>
+        <a class="product-two" href="{{ url_for('accessory')}}">
             <i class="fa-solid fa-computer"></i>
-        </div>
-        <div class="product-three">
+        </a>
+        <a class="product-three" href="{{ url_for('accessory')}}">
             <i class="fa-solid fa-computer-mouse"></i>
-        </div>
-        <div class="product-four">
-            <i class="fa-solid fa-memory"></i>
-        </div>
-        <div class="product-five">
+        </a>
+        <a class="product-four" href="{{ url_for('lt_page')}}">
+            <i class="fa-solid fa-laptop"></i>
+        </a>
+        <a class="product-five" href="{{ url_for('apple_dt')}}">
             <i class="fa-solid fa-tv"></i>
-        </div>
-        <div class="product-six">
+        </a>
+        <a class="product-six" href="{{ url_for('apple_dt')}}">
             <i class="fa-solid fa-question"></i>
-        </div>
+        </a>
      </div>
     </div>
     <a href="{{ url_for('shopping_cart')}}" class="basket-circul">
         <i class="fa-solid fa-cart-shopping"></i>
         <p>0</p>
     </a>
+</section>
+<footer>
+    <div class="footer-container">
+      <div class="footer-section">
+        <h3>About Us</h3>
+        <p>Learn more about Ztech and our mission to provide the best PC and laptop components.</p>
+      </div>
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="/laptops">Products</a></li>
+          <li><a href="https://www.linkedin.com/in/ziad-adham/">Contact Us</a></li>
+          <li><a href="/faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Follow Us</h3>
+        <a href="https://www.facebook.com/ziad.adham.714/">Facebook</a> | <a href="https://x.com/ZiadAdham2002">Twitter</a> | <a href="https://www.linkedin.com/in/ziad-adham/">Linkedin</a>
+      </div>
+    </div>
+  </footer>  
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{{ url_for('static', filename='js/laptop.js')}}"></script>
 </body>
