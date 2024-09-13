@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ztech</title>
+    
+    <!-- Link to CSS files -->
+    <link rel="stylesheet" href="css/p-main.css"/>
+    <link rel="stylesheet" href="css/header.css"/>
+    <link rel="stylesheet" href="css/shopping-cart.css"/>
+    <link rel="stylesheet" href="css/footer.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Inline CSS for fonts and colors -->
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400&family=Montserrat:wght@600;700&family=Merriweather:wght@700&family=Roboto+Slab:wght@500&family=Poppins:wght@500&family=Playfair+Display:ital,wght@0,400;1,400&display=swap');
+      :root {
+          --primary-color: #FFFFFF;
+          --secondary-color: #C0392B;
+          --first-color: #F2F2F2;
+          --second-color: #333333;
+          --third-color: #E74C3C;
+      }
+      body {
+          font-family: 'Roboto', sans-serif;
+          font-weight: 400;
+          color: #333333;
+      }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <div class="logo-container">
+                <!-- Replace Flask {{ url_for }} with the direct image path -->
+                <img src="images/logo.jpg" alt="Ztech Logo">
+            </div>
+            <div class="nav-container">
+                <button>Build</button>
+                <button>Help</button>
+                <button>Login</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="sub-header">
+        <div class="container">
+            <button class="home-page-btn" onclick="location.href='index.html'">Home</button>
+            <button onclick="location.href='laptops.html'">Laptop</button>
+            <button onclick="location.href='apple.html'">Apple</button>
+            <button onclick="location.href='accessories.html'">Accessories</button>
+            <button>Professions</button>
+        </div>
+    </div>
+
+    <section>
+        <div class="adds">
+            <div class="container">
+                <!-- Add your content here -->
+            </div>
+        </div>
+
+        <div class="products-to-show">
+            <div class="container">
+                <a href="apple.html">
+                    <i class="fa-brands fa-apple"></i>
+                </a>
+                <a href="accessories.html">
+                    <i class="fa-solid fa-computer"></i>
+                </a>
+                <a href="accessories.html">
+                    <i class="fa-solid fa-computer-mouse"></i>
+                </a>
+                <a href="laptops.html">
+                    <i class="fa-solid fa-laptop"></i>
+                </a>
+            </div>
+        </div>
+
+        <a href="shopping_cart.html" class="basket-circul">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <p>0</p>
+        </a>
+    </section>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>About Us</h3>
+                <p>Learn more about Ztech and our mission to provide the best PC and laptop components.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="laptops.html">Products</a></li>
+                    <li><a href="https://www.linkedin.com/in/ziad-adham/">Contact Us</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <a href="https://www.facebook.com/ziad.adham.714/">Facebook</a> | 
+                <a href="https://x.com/ZiadAdham2002">Twitter</a> | 
+                <a href="https://www.linkedin.com/in/ziad-adham/">LinkedIn</a>
+            </div>
+        </div>
+    </footer>  
+
+    <!-- Link to JS files -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="js/laptop.js"></script>
+</body>
+</html>
