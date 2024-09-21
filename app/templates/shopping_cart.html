@@ -17,9 +17,13 @@
                 <img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="Photo">
             </div>
             <div class="nav-container">
-                <button>Build</button>
-                <button>Help</button>
-                <button>Login</button>
+                {% if loggedin %}
+                <button class="logout">Logout</button>
+                {% else %}
+                <button onclick="location.href='{{ url_for('auth.login') }}'">Login</button>
+                {% endif %}
+            <button onclick="location.href='{{ url_for('auth.signup') }}'">Sign Up</button>
+            <button onclick="location.href='{{ url_for('homePage') }}'">Build</button>
             </div>
             </div>
         </header>

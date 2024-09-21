@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/shopping-cart.css') }}"/>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css"/>
 </head>
 <body>
     <header class="main-header">
@@ -17,26 +18,99 @@
             <img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="Photo">
         </div>
         <div class="nav-container">
-            <button>Build</button>
-            <button>Help</button>
-            <button>Login</button>
+            {% if loggedin %}
+            <button class="logout">Logout</button>
+            {% else %}
+            <button onclick="location.href='{{ url_for('auth.login') }}'">Login</button>
+            {% endif %}
+            <button onclick="location.href='{{ url_for('auth.signup') }}'">Sign Up</button>
+            <button onclick="location.href='{{ url_for('homePage') }}'">Build</button>
         </div>
         </div>
     </header>
     <div class="sub-header">
     <div class="container">
         <button onclick="location.href = '{{ url_for('homePage')}}'" class="home-page-btn">Home</button>
-        <button onclick="location.href='{{ url_for('lt_page') }}'">Laptop</button>
-        <button onclick="location.href='{{ url_for('apple') }}'">Apple</button>
-        <button onclick="location.href='{{ url_for('accessory')}}'">Accesories</button>
+        <button onclick="location.href = '{{ url_for('lt_page') }}'">Laptop</button>
+        <button onclick="location.href = '{{ url_for('apple') }}'">Apple</button>
+        <button onclick="location.href = '{{ url_for('accessory')}}'">Accesories</button>
         <button>Proffissions</button>
     </div>
     </div>
     <section>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flash-messages">
+                {% for category, message in messages %}
+                    <div class="flash-message flash-{{ category }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
     <div class="adds">
-    <div class="container">
-        
-    </div>
+        <div class="container">
+            <!-- Swiper -->
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <img src="" alt="Product 1">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="" alt="Product 2">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="" alt="Product 3">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="" alt="Product 4">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="" alt="Product 5">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="" alt="Product 6">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="" alt="Product 7">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="" alt="Product 8">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="" alt="Product 9">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="" alt="Product 10">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="" alt="Product 11">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="" alt="Product 12">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="" alt="Product 13">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="" alt="Product 14">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="" alt="Product 15">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="" alt="Product 16">
+                    </div>
+                    <!-- Add more slides as needed -->
+                </div>
+                <!-- Add Pagination -->
+                <div class="swiper-pagination"></div>
+                <!-- Add Navigation -->
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+        </div>
     </div>
     <div class="products-to-show">
     <div class="container">
@@ -86,6 +160,29 @@
     </div>
   </footer>  
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
     <script src="{{ url_for('static', filename='js/laptop.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/flashed-messages.js')}}"></script>
+    <script>
+        var swiper = new Swiper('.swiper-container', {
+    slidesPerView: 1,
+    spaceBetween: 10,
+    pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+        dynamicBullets: false,
+    },
+    navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+    },
+    autoplay: {
+        delay: 5000,
+        disableOnInteraction: false,
+    },
+    loopedSlides: 3,
+    loop: false,
+});
+    </script>
 </body>
 </html>

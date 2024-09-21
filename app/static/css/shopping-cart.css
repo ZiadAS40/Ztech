@@ -132,6 +132,7 @@ body {
     position: sticky;
     bottom: 0;
     width: 100%;
+    border-bottom: 1px solid var(--first-color);
 }
 
 .constant-bar .container {

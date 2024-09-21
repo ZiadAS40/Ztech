@@ -68,3 +68,49 @@ div.container {
     color: var(--secondary-color);
 }
 /* end the products section */
+
+/* start the flash message */
+.flash-message {
+    padding: 10px;
+    margin: 112px 0;
+    border-radius: 5px;
+    color: #fff;
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 1;
+    transition: opacity 0.5s ease-out;
+}
+
+.flash-success {
+    background-color: #d4edda;
+    color: #155724;
+
+}
+
+.hidden {
+    display: none;
+}
+/* end the flash message */
+.swiper-wrapper {
+    max-width: max-content;
+}
+.swiper-container{
+    overflow: hidden;
+    grid-column: 1 / 13;
+}
+.swiper-slide {
+    position: relative;
+    height: 200px;
+    width: 200px;
+    max-width: 200px;
+    overflow-x: hidden;
+    background-color: var(--third-color);
+}
+
+
+.swiper-button-next,
+.swiper-button-prev {
+    color: var(--secondary-color);
+}

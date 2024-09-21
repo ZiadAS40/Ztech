@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400&family=Montserrat:wght@600;700&family=Merriweather:wght@700&family=Roboto+Slab:wght@500&family=Poppins:wght@500&family=Playfair+Display:ital,wght@0,400;1,400&display=swap');
+
+/* main settings */
+:root {
+    --primary-color: #FFFFFF;
+    --secondary-color: #C0392B;
+
+    --first-color: #F2F2F2;
+    --second-color: #333333;
+    --third-color: #E74C3C;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    color: #333333;
+}
+
+/* main apple container */
+
+/* start flashed messages */
+.flash-messages {
+    grid-column: 5/9;
+}
+
+.flash-message {
+    padding: 10px 20px;
+    margin: 10px 0;
+    border-radius: 4px;
+    font-size: 16px;
+    position: relative;
+    animation: fadeIn 0.5s ease;
+}
+
+.flash-success {
+    background-color: #d4edda;
+    color: #155724;
+    border-left: 5px solid #28a745;
+}
+
+.flash-error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border-left: 5px solid #dc3545;
+}
+
+.flash-info {
+    background-color: #d1ecf1;
+    color: #0c5460;
+    border-left: 5px solid #17a2b8;
+}
+
+/* end flashed messages */
