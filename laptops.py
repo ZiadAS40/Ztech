@@ -693,9 +693,6 @@ def rate_laps(laps):
         final_laps.append(lap)
     return final_laps
 
-any_lap = get_budget(rate_laps(laptops), 1000)
-for lap in any_lap:
-    print(f"{lap['name']} ---> {lap['rate']}")
 
 with open('laptops.json', 'w') as f:
     json.dump(laptops, f)
