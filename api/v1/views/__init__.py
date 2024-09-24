@@ -10,3 +10,4 @@ from api.v1.views.acc import *
 from api.v1.views.apple_dt import *
 from api.v1.views.apple_lt import *
 from api.v1.views.shopping_cart import *
+from api.v1.views.laptops_to_rate import *

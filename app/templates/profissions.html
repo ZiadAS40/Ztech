@@ -6,6 +6,7 @@
     <title>Ztech</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/p-main.css') }}"/>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/pro.css') }}"/>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/laptop.css') }}"/>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/shopping-cart.css') }}"/>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}"/>
@@ -38,36 +39,26 @@
     </div>
     </div>
     <section>
-    <div class="lt-body">
+    <div class="pro_body">
         <div class="container">
-            {% for laptop in laptops %}
-            <div class="lt" data-id="{{ laptop.id }}" data-type="laptops">
-                <div class="i-container">
-                <i class="fa-solid fa-laptop"></i>
+            <a class="pro_card" href="{{ url_for('budget') }}">
+                <div class="logo-cont">
+                    <i class="fa-solid fa-code"></i>
                 </div>
-                {% if rated %}
-                <div class="lt-content">
-                    <p><B>Model</B>: {{ laptop.name }}</p><br/>
-                    <p><B>srorage</B>: {{ laptop.Storage['capacity'] }}</p><br/>
-                    <p><B>Ram</B>: {{ laptop.RAM['size'] }} </p><br/>
-                    <p><B>CPU</B>: {{ laptop.CPU['nameOfCpu'] }}</p><br/>
-                    <p><B>GPU</B>: {{ laptop.GPU['nameOfGpu'] }}</p><br/>
-                    <p><B>Price</B>: {{ laptop.price }}</p><br/>
-                    <button class="add-btn" data-id="{{ laptop.id }}" data-type="laptops">Add to Basket</button>
+                <h3>Software engineer</h3>
+            </a >
+            <a class="pro_card">
+                <div class="logo-cont">
+                <i class="fa-solid fa-code"></i>
                 </div>
-                {% else %}
-                <div class="lt-content">
-                    <p><B>Model</B>: {{ laptop.name }}</p><br/>
-                    <p><B>Ram</B>: {{ laptop.ram }} G</p><br/>
-                    <p><B>srorage</B>: {{ laptop.ssd }} G</p><br/>
-                    <p><B>CPU</B>: {{ laptop.cpu }}</p><br/>
-                    <p><B>GPU</B>: {{ laptop.gpu }}</p><br/>
-                    <p><B>Price</B>: {{ laptop.price }} $</p><br/>
-                    <button class="add-btn" data-id="{{ laptop.id }}" data-type="laptops">Add to Basket</button>
+                <h3>Software engineer</h3>
+            </a>
+            <a class="pro_card">
+                <div class="logo-cont">
+                    <i class="fa-solid fa-code"></i>
                 </div>
-                {% endif %}
-            </div>
-            {% endfor %}
+                <h3>Software engineer</h3>
+            </a>
         </div>
         </div>
     </div>

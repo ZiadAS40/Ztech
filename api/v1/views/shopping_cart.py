@@ -2,16 +2,15 @@
 """make the laptops section"""
 
 from api.v1.views import app_views
-import uuid
+import json
 from flask import jsonify, make_response, request, abort
 from flask_jwt_extended import get_jwt_identity, jwt_required
-from app.models import User
 from flask_login import login_required, current_user
-from app.routes import app
 
 orders = {}
-loggout_orders = {}
-users_orders = {}
+
+
+
 def remove_duplicates(d):
     seen_values = []
     result = {}
@@ -21,50 +20,80 @@ def remove_duplicates(d):
             seen_values.append(value)
     return result
 
-
+# get the cart for ths user (get the count)
 @app_views.route('/shopping_cart', methods=['GET'], strict_slashes=False)
 @login_required
 def shopping_getter():
     """make the api for getting the orders"""
     try:
+        with open('users.json', 'r') as f:
+            if f.read().strip() == "":
+                users_orders = {}
+            else:
+                f.seek(0)
+                users_orders = json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        users_orders = {}
+    
+    try:
         return make_response(jsonify(users_orders[current_user.id]), 200)
     except KeyError:
         return make_response(jsonify({}), 201)
+    
 
+# get the cart for ths user (get the count)
 @app_views.route('/loggout_shopping_cart', methods=['GET'], strict_slashes=False)
 def shopping_loggout_getter():
     """make the api for getting the orders"""
     try:
-        return make_response(jsonify(loggout_orders), 200)
+        with open('users.json', 'r') as f:
+            if f.read().strip() == "":
+                users_orders = {}
+            else:
+                f.seek(0)
+                users_orders = json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        users_orders = {}
+    try:
+        return make_response(jsonify(users_orders['unknowen']), 200)
     except KeyError:
         return make_response(jsonify({}), 201)        
 
-# making get request after the POST request to fill orders
+# get the cart for the user to show in the shopping cart page
 @app_views.route('/shopping_cart_to_show', methods=['GET'], strict_slashes=False)
 @login_required
 def shopping_getter_to_show():
     """make the api for getting the orders"""
     # making a special dict {'object's is': [list of all the abjects with the same id]}
-    current_id = current_user.id
-    if current_id in users_orders:    
 
-        elements = {obje['id']: [obj for obj in users_orders[current_id].values() if obj['id'] == obje['id']] for obje in users_orders[current_id].values()}
+    try:
+        with open('users.json', 'r') as f:
+            if f.read().strip() == "":
+                users_orders = {}
+            else:
+                f.seek(0)
+                users_orders = json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        users_orders = {}
+    
+    return make_response(jsonify(users_orders[current_user.id]), 200)
 
-        uniqueEls = remove_duplicates(elements)
 
-        return make_response(jsonify(uniqueEls), 200)
-    else:
-        return make_response(jsonify({}), 404)
-
-# Making GET request for the logout to show
+# get the cart for the user to show in the shopping cart page (loggout)
 @app_views.route('/loggout_shopping_cart_to_show', methods=['GET'], strict_slashes=False)
 def loggout_getter_to_show():
     """Handle the logout data to show"""
-    elements = {obj['id']: [obje for obje in loggout_orders.values() if obj['id'] == obje['id']] for obj in loggout_orders.values()}
+    try:
+        with open('users.json', 'r') as f:
+            if f.read().strip() == "":
+                users_orders = {}
+            else:
+                f.seek(0)
+                users_orders = json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        users_orders = {}    
     
-    uniqueEls = remove_duplicates(elements)
-    
-    return make_response(jsonify(uniqueEls), 200)
+    return make_response(jsonify(users_orders['unknowen']), 200)
 
 
 @app_views.route('/shopping_cart', methods=['POST'], strict_slashes=False)
@@ -72,6 +101,15 @@ def loggout_getter_to_show():
 def shopping_setter():
     """setting the order"""
     user_id = get_jwt_identity()
+    try:
+        with open('users.json', 'r') as f:
+            if f.read().strip() == "":
+                users_orders = {}
+            else:
+                f.seek(0)
+                users_orders = json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        users_orders = {}
 
     if not request.get_json():
         abort(400, description="Missing JSON data")
@@ -81,15 +119,19 @@ def shopping_setter():
     if 'id' not in data:
         abort(400, description="Missing 'id' in request data")
     
-    if data['id'] in orders:
-        order_id = str(uuid.uuid4())
-    else:
-        order_id = data['id']
-    orders[order_id] = data
+    
+    order_id = data['id']
+
     if user_id not in users_orders:
         users_orders[user_id] = {}
+    
+    if user_id in users_orders and order_id not in users_orders[user_id]:
+        users_orders[user_id][order_id] = []
 
-    users_orders[user_id][order_id] = data
+    users_orders[user_id][order_id].append(data)   
+    
+    with open('users.json', 'w') as f:
+        json.dump(users_orders, f)
 
     return make_response(jsonify(data), 201)
 
@@ -99,17 +141,36 @@ def loggout_cart():
     """making the loggout shopping cart"""
     if not request.get_json():
         abort(400, description="Missing JSON data")
+    
+    try:
+        with open('users.json', 'r') as f:
+            if f.read().strip() == "":
+                users_orders = {}
+            else:
+                f.seek(0)
+                users_orders = json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        users_orders = {}
 
+    user_id = 'unknowen'
     data = request.get_json()
     
     if 'id' not in data:
         abort(400, description="Missing 'id' in request data")
     
-    if data['id'] in loggout_orders:
-        order_id = str(uuid.uuid4())
-    else:
-        order_id = data['id']
-    loggout_orders[order_id] = data
+    
+    order_id = data['id']
+
+    if user_id not in users_orders:
+        users_orders[user_id] = {}
+    
+    if user_id in users_orders and order_id not in users_orders[user_id]:
+        users_orders[user_id][order_id] = []
+
+    users_orders[user_id][order_id].append(data)
+
+    with open('users.json', 'w') as f:
+        json.dump(users_orders, f)
 
     return make_response(jsonify(data), 201)
 
@@ -135,7 +196,16 @@ def sync_loggout_with_user():
     making syncronizatoin between the shopping cart for a user
     and the loggout shopping cart
     """
-    for order, value in loggout_orders.items():
+    try:
+        with open('users.json', 'r') as f:
+            if f.read().strip() == "":
+                users_orders = {}
+            else:
+                f.seek(0)
+                users_orders = json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        users_orders = {}
+    for order, value in users_orders.items():
         if order not in users_orders[current_user.id]:
             users_orders[current_user.id][order] = value
         del loggout_cart[order]

@@ -81,6 +81,7 @@ div.container {
     transform: translateX(-50%);
     opacity: 1;
     transition: opacity 0.5s ease-out;
+    z-index: 1000;
 }
 
 .flash-success {

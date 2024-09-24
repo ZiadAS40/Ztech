@@ -50,8 +50,15 @@ $('button.add-btn').on('click', function() {
                     $.get(`http://127.0.0.1:5000/api/v1/shopping_cart`)
                     .done((response) => {
                         console.log(response);
+                        let counter = 0;
+                        for (let key in response) {
+                            if (response.hasOwnProperty(key)) {
+                                counter  += response[key].length;  // Add the length of each array to the total count
+                            }
+                          }
+                          console.log(counter)
                         basketNum = Object.keys(response).length;
-                        $('.basket-circul p').text(basketNum);
+                        $('.basket-circul p').text(counter);
                     });
                 },
                 error: (xhr, status, error) => {
@@ -69,10 +76,15 @@ $('button.add-btn').on('click', function() {
                 success: (response) => {
                     $.get(`http://127.0.0.1:5000/api/v1/loggout_shopping_cart`)
                     .done((response) => {
-                        console.log(response);
+                        let counter = 0;
+                            for (let key in response) {
+                                if (response.hasOwnProperty(key)) {
+                                    counter  += response[key].length;
+                                }
+                              }
                         basketNum = Object.keys(response).length;
-                        $('.basket-circul p').text(basketNum);
-                    });
+                        $('.basket-circul p').text(counter);
+                });
                 },
                 error: (xhr, status, error) => {
                     console.error("Form submission failed:", error);
@@ -89,23 +101,25 @@ access_token = localStorage.getItem('access_token');
 if (access_token){
 $.get(`http://127.0.0.1:5000/api/v1/shopping_cart`)
                 .done((response) => {
-                    if (response) {
-                        console.log(response);
-                    } else {
-                        console.log("nothing in the shopping-cart");
-                    }
+                    let counter = 0;
+                        for (let key in response) {
+                            if (response.hasOwnProperty(key)) {
+                                counter  += response[key].length;
+                            }
+                          }
                     basketNum = Object.keys(response).length;
-                    $('.basket-circul p').text(basketNum);
+                    $('.basket-circul p').text(counter);
 });
 } else {
     $.get(`http://127.0.0.1:5000/api/v1/loggout_shopping_cart`)
-                .done((response) => {
-                    if (response) {
-                        console.log(response);
-                    } else {
-                        console.log("nothing in the shopping-cart");
-                    }
-                    basketNum = Object.keys(response).length;
-                    $('.basket-circul p').text(basketNum);
+    .done((response) => {
+        let counter = 0;
+            for (let key in response) {
+                if (response.hasOwnProperty(key)) {
+                    counter  += response[key].length;
+                }
+              }
+        basketNum = Object.keys(response).length;
+        $('.basket-circul p').text(counter);
 });
 }

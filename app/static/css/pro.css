@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400&family=Montserrat:wght@600;700&family=Merriweather:wght@700&family=Roboto+Slab:wght@500&family=Poppins:wght@500&family=Playfair+Display:ital,wght@0,400;1,400&display=swap');
+
+/* main settings */
+:root {
+    --primary-color: #FFFFFF;
+    --secondary-color: #C0392B;
+
+    --first-color: #F2F2F2;
+    --second-color: #333333;
+    --third-color: #E74C3C;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    color: #333333;
+}
+
+/* Profissoin Section */
+.pro_body {
+    min-height: 100vh;
+}
+
+.pro_body .container {
+    background-color: var(--first-color);
+    grid-template-rows: repeat(3, 1fr);
+    grid-column: 20px;
+    height: 100vh;
+}
+
+.pro_card {
+    grid-column: span 4;
+    grid-row: span 1;
+    background-color: var(--second-color);
+    color: var(--third-color);
+    margin-top: 40px;
+    border-radius: 10px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.5s ease; 
+}
+
+.pro_card:hover {
+    color: var(--second-color);
+    background-color: var(--third-color);
+}
+
+.logo-cont {
+    width: 100%;
+    height: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pro_card h3 {
+    margin-top: 5px;
+}
+
+.pro_card i {
+    font-size: 50px;
+}
+/* Profissoin Section */

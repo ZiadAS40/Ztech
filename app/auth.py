@@ -6,11 +6,21 @@ from flask_jwt_extended import create_access_token
 from flask_login import login_user, logout_user, current_user
 from .models import User
 from .routes import db
-import requests
+import json
+
+
 auth = Blueprint('auth', __name__)
 
+try:
+    with open('users.json', 'r') as f:
+        if f.read().strip() == "":
+            users_orders = {}
+        else:
+            f.seek(0)
+            users_orders = json.load(f)
+except (FileNotFoundError, json.JSONDecodeError):
+    users_orders = {}
 
-current_id = ''
 
 @auth.route('/signup', methods=['GET', 'POST'])
 def signup():
@@ -55,13 +65,59 @@ def login():
         
         # validate the user and check the password
         if user and user.check_password(password):
+            try:
+                with open('users.json', 'r') as f:
+                    if f.read().strip() == "":
+                        users_orders = {}
+                    else:
+                        f.seek(0)
+                        users_orders = json.load(f)
+            except (FileNotFoundError, json.JSONDecodeError):
+                users_orders = {}          
             login_user(user)
-            session_cookie = request.cookies.get('session')
-            res = requests.post('http://127.0.0.1:5000/api/v1/sync', cookies={'session': session_cookie})
-            if res.status_code == 201:
-                print("POST request successful")
-            else:
-                print(f"POST request failed with status code: {res.status_code}")
+            try:
+                logout = users_orders['unknowen']
+            except (KeyError):
+                logout = {}
+                print('no logout')
+            try:
+                login = users_orders[user.id]
+            except (KeyError):
+                login = {}
+            
+            if not login:
+                print('no login')
+            if logout:
+                print('logout')
+
+            if not login and logout:
+                print('no login yes logout')
+                users_orders[user.id] = users_orders['unknowen']
+                del users_orders['unknowen']
+            
+            if login and logout:
+                for order in login:
+                    try:
+                        sync_order = logout[order]
+                    except (KeyError):
+                        sync_order = []
+                    login[order] = login[order] + sync_order
+                
+                for order in logout:
+                    try:
+                        sync_order = logout[order]
+                    except (KeyError):
+                        sync_order = []
+                    if order not in login:
+                        login[order] = []
+                    login[order] = login[order] + sync_order
+                del users_orders['unknowen']
+            
+                users_orders[user.id] = login
+            
+            with open('users.json', 'w') as f:
+                json.dump(users_orders, f)
+            
             access_token = create_access_token(identity=user.id)
             res = {
                 'access_token': access_token,

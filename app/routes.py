@@ -65,7 +65,7 @@ def lt_page():
     login_status = False
     if current_user.is_authenticated:
         login_status = True
-    return render_template('laptops.html', laptops=laptops, loggedin=login_status)
+    return render_template('laptops.html', laptops=laptops, loggedin=login_status, rated=False)
 
 @app.route('/apple')
 def apple():
@@ -115,14 +115,44 @@ def shopping_cart():
     # Pass the session cookie to the request headers
     response = requests.get('http://127.0.0.1:5000/api/v1/shopping_cart_to_show', cookies={'session': session_cookie})
 
+        
+
+
     if response.status_code == 401:
         response = requests.get('http://127.0.0.1:5000/api/v1/loggout_shopping_cart_to_show')
     
     data = response.json()
+    print(data)
 
     for el in data.values():
         total_price += el[0]['price'] * len(el)
     
     return render_template('shopping_cart.html', elements=data, total_price=round(total_price, 2), loggedin=login_status)
+
+@app.route('/profissions', methods=["GET"], strict_slashes=False)
+def pro():
+    login_status = False
+    if current_user.is_authenticated:
+        login_status = True
+
+
+    return render_template ('profissions.html', loggedin=login_status)
+@app.route('/budget', methods=['GET', 'POST'], strict_slashes=False)
+def budget():
+    login_status = False
+    if current_user.is_authenticated:
+        login_status = True
+    if request.method == 'POST':
+        budget = int(request.form['budget'])
+
+        res = requests.post('http://127.0.0.1:5000/api/v1/SWEs', json={'budget': budget})
+
+        # Accessing the JSON data from the response correctly
+        if res.status_code == 201:
+            laptops = res.json()  # Get the JSON data
+
+            return render_template('laptops.html', loggedin=login_status, laptops=laptops, rated=True)
+    
+    return render_template('budget.html')
 
 
